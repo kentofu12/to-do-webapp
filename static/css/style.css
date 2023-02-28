@@ -1,0 +1,141 @@
+body {
+    background-color: #E6DDC4;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
+
+header, .top{
+    background-color: #678983;
+}
+
+.top{
+    padding-bottom: 40px;
+}
+
+.task_form{
+    padding-top: 70px;
+}
+
+.date_pick{
+    margin-top: 30px;
+}
+
+.all_day_check{
+    font-size: 1.5em;
+}
+
+h1 {
+    font-size: 5.0em;
+}
+
+h2 {
+    font-size: 2.0em;
+}
+
+h3 {
+    color: #ff0000;
+}
+
+
+p {
+    font-size: 1.5em;
+}
+
+.to_do_lists {
+    padding-top: 20px;
+    font-size: 2.0em;
+    color: black;
+}
+
+.datetimepicker {
+    font-size: 1.25em;
+	display: inline-flex;
+	align-items: center;
+	background-color: #fff;
+}
+
+.todo_button{
+    font-size: 0.5em;
+}
+
+.to_do_list_nav{
+    padding-top: 30px;
+}
+
+.nav.nav-tabs{
+    font-size: 1.5em;
+}
+
+.nav.nav-tabs button{
+    color: #678983;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .show > .nav-link{
+    color: #fff;
+    background-color: #181D31;
+    border-radius: 10px;
+}
+
+.tab-content{
+    padding-top: 20px;
+}
+
+.todo_button button {
+    align-items: center;
+    background-color: #678983;
+    border: 0;
+    border-radius: 100px;
+    width: 80px;
+    height: 40px;
+    color: #F0E9D2;
+    font-size: 2.0em;
+}
+
+.todo_button button:hover,
+.todo_button button:focus {
+  background-color: #b3c6c3;
+  color: #F0E9D2;
+}
+
+
+
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+}
+
+.button-18:hover,
+.button-18:focus {
+  background-color: #16437E;
+  color: #ffffff;
+}
+
+.button-18:active {
+  background: #09223b;
+  color: rgb(255, 255, 255, .7);
+}
+
+.button-18:disabled {
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, .08);
+  color: rgba(0, 0, 0, .3);
+}

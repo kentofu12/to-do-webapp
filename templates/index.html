@@ -1,0 +1,207 @@
+{% include "header.html" %}
+
+
+<section class="top">
+    <section class="greeting">
+        <div class="container">
+            <div class="row">
+                <h1>Make your task visible</h1>
+            </div>
+            <div class="row">
+                <h2>Save your task. Kick your task.</h2>
+            </div>
+        </div>
+    </section>
+    <!--    <section class="time_display">-->
+    <!--        <div class="container">-->
+    <!--            <div class="row">-->
+    <!--                <div class="date">-->
+    <!--            <h1>Today is {{ date }}</h1>-->
+    <!--        </div>-->
+    <!--&lt;!&ndash;        <div class="container">&ndash;&gt;-->
+    <!--&lt;!&ndash;            <script>&ndash;&gt;-->
+    <!--&lt;!&ndash;                function set2fig(num) {&ndash;&gt;-->
+    <!--&lt;!&ndash;                // 桁数が1桁だったら先頭に0を加えて2桁に調整する&ndash;&gt;-->
+    <!--&lt;!&ndash;                 var ret;&ndash;&gt;-->
+    <!--&lt;!&ndash;                 if( num < 10 ) { ret = "0" + num; }&ndash;&gt;-->
+    <!--&lt;!&ndash;                 else { ret = num; }&ndash;&gt;-->
+    <!--&lt;!&ndash;                 return ret;&ndash;&gt;-->
+    <!--&lt;!&ndash;                }&ndash;&gt;-->
+    <!--&lt;!&ndash;                function showClock2() {&ndash;&gt;-->
+    <!--&lt;!&ndash;                var nowTime = new Date();&ndash;&gt;-->
+    <!--&lt;!&ndash;                var nowYear = set2fig( nowTime.getFullYear() );&ndash;&gt;-->
+    <!--&lt;!&ndash;                var nowMonth = set2fig( nowTime.getMonth() + 1);&ndash;&gt;-->
+    <!--&lt;!&ndash;                var nowDate = set2fig( nowTime.getDate() );&ndash;&gt;-->
+    <!--&lt;!&ndash;                var nowHour = set2fig( nowTime.getHours() );&ndash;&gt;-->
+    <!--&lt;!&ndash;                var nowMin  = set2fig( nowTime.getMinutes() );&ndash;&gt;-->
+    <!--&lt;!&ndash;                var nowSec  = set2fig( nowTime.getSeconds() );&ndash;&gt;-->
+    <!--&lt;!&ndash;                var msg = `${nowYear}/${nowMonth}/${nowDate}`;&ndash;&gt;-->
+    <!--&lt;!&ndash;                var msg2 = `${nowHour}:${nowMin}:${nowSec}`;&ndash;&gt;-->
+    <!--&lt;!&ndash;                document.getElementById("RealtimeClockArea2").innerHTML = msg;&ndash;&gt;-->
+    <!--&lt;!&ndash;                document.getElementById("RealtimeClockArea3").innerHTML = msg2;&ndash;&gt;-->
+    <!--&lt;!&ndash;                }&ndash;&gt;-->
+    <!--&lt;!&ndash;                setInterval('showClock2()',1000);&ndash;&gt;-->
+    <!--&lt;!&ndash;            </script>&ndash;&gt;-->
+    <!--&lt;!&ndash;            <div class="row">&ndash;&gt;-->
+    <!--&lt;!&ndash;                <div class="col-md-6">&ndash;&gt;-->
+    <!--&lt;!&ndash;                    <h1 id="RealtimeClockArea2"></h1>&ndash;&gt;-->
+    <!--&lt;!&ndash;                </div>&ndash;&gt;-->
+    <!--&lt;!&ndash;                <div class="col-md-6">&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;                   <h1 id="RealtimeClockArea3"></h1>&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;                </div>&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;            </div>&ndash;&gt;-->
+    <!--&lt;!&ndash;        </div>&ndash;&gt;-->
+
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </section>-->
+    <section class="task_form">
+        <div class="container">
+            <form method="POST">
+                <div class="form-group">
+                    <div class="row task_box">
+                        <input name="todo" type="text" class="form-control form-control-lg" placeholder="Write your task here and press Enter key" required="required">
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        {% for message in messages %}
+                        <h3>{{ message }}</h3>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                    <div class="row date_pick">
+                        <div class="col-xl-3 px-0">
+                            <div class="datetimepicker">
+                                <script>
+                                        function connecttext( time_value, ischecked ) {
+                                        if( ischecked == true ) {
+                                          // チェックが入っていたら有効化
+                                          document.getElementById(time_value).disabled = true;
+                                        }
+                                        else {
+                                          // チェックが入っていなかったら無効化
+                                          document.getElementById(time_value).disabled = false;
+                                        }
+                                        }
+                                    </script>
+                                <input name="date" type="date" id="date" value="{{ date }}">
+                                <input name="time" type="time" id="time_value" value="{{ time }}">
+                            </div>
+                        </div>
+                        <div class="col-md-3 all_day_check px-0">
+                            <label><input type="checkbox" name="all_day" value="on" onclick="connecttext('time_value', this.checked);">All Day?</label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</section>
+<section class="to_do_list_nav">
+    {% if current_user.is_authenticated: %}
+    <div class="container">
+        <div class="row">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button
+                            class="nav-link active"
+                            id="home-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#home"
+                            type="button"
+                            role="tab"
+                            aria-controls="home"
+                            aria-selected="true"
+                    >
+                        To-Dos
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button
+                            class="nav-link"
+                            id="profile-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#profile"
+                            type="button"
+                            role="tab"
+                            aria-controls="profile"
+                            aria-selected="false"
+                    >
+                        Completed
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div
+                        class="tab-pane fade show active"
+                        id="home"
+                        role="tabpanel"
+                        aria-labelledby="home-tab"
+                >
+                    {% for todo in todos: %}
+                    <div class="row">
+                        {% if current_user.id == todo.user_id: %}
+                        {% if todo.overdue == 0: %}
+                        <div class="col-md-5 text-secondary">
+                            <p>{{ todo.todo }}</p>
+                        </div>
+                        <div class="col-md-4 text-secondary">
+                            <p>{{ todo.due }}</p>
+                        </div>
+                        {% else: %}
+                        <div class="col-md-5 text-danger">
+                            <p>{{ todo.todo }}</p>
+                        </div>
+                        <div class="col-md-4 text-danger">
+                            <p>{{ todo.due }}</p>
+                        </div>
+                        {% endif %}
+                        <div class="col-md-3 todo_button">
+                            <button type="button" onclick="location.href='{{ url_for('get_todo_done', todo_id=todo.id)}}'">Done</button>
+                            <button type="button" onclick="location.href='{{ url_for('edit_todo', todo_id=todo.id) }}'">Edit</button>
+                            <button type="button" onclick="location.href='{{ url_for('delete_todo', todo_id=todo.id)}}'">Delete</button>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                <div
+                        class="tab-pane fade"
+                        id="profile"
+                        role="tabpanel"
+                        aria-labelledby="profile-tab"
+                >
+                    {% for todo in todos_done: %}
+                    <div class="row">
+                        {% if current_user.id == todo.user_id: %}
+                        <div class="col-xl-8 text-secondary">
+                            <p>{{ todo.todo }}</p>
+                        </div>
+                        <div class="col-xl-4 todo_button">
+                            <button type="button" onclick="location.href='{{ url_for('delete_todo', todo_id=todo.id)}}'">Delete</button>
+                            <button type="button" onclick="location.href='{{ url_for('restore_todo', todo_id=todo.id)}}'">Restore</button>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</section>
+<script>
+        var dateEl = document.getElementById('date');
+        var timeEl = document.getElementById('time');
+
+        document.getElementById('date-output').innerHTML = dateEl.type === 'date';
+        document.getElementById('time-output').innerHTML = timeEl.type === 'time';
+    </script>
+<script type="module">
+        import { Toast } from "bootstrap.esm.min.js";
+
+        Array.from(document.querySelectorAll(".toast")).forEach(
+        (toastNode) => new Toast(toastNode)
+        );
+</script>
+{% include "footer.html" %}

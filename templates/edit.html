@@ -1,0 +1,53 @@
+{% include "header.html" %}
+
+<section class="top">
+    <section class="todo_edit">
+        <div class="container">
+            <div class="row">
+                <div class="col-md">
+                    <h1>{{ todo.todo}}</h1><h1>{{ todo.due }}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="task_form">
+        <div class="container">
+                <form method="POST">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input name="todo" type="text" class="form-control form-control-lg" value="{{ todo.todo }}" required="required">
+                            </div>
+                            <div class="col-md-3">
+                                <div class="datetimepicker">
+                                    <script>
+                                        function connecttext( time_value, ischecked ) {
+                                        if( ischecked == true ) {
+                                          // チェックが入っていたら有効化
+                                          document.getElementById(time_value).disabled = true;
+                                        }
+                                        else {
+                                          // チェックが入っていなかったら無効化
+                                          document.getElementById(time_value).disabled = false;
+                                        }
+                                        }
+                                    </script>
+                                    <input name="date" type="date" id="date" value="{{ date }}">
+	                                <input name="time" type="time" id="time_value" value="{{ time }}">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                {% if time|length == 0: %}
+                                    <label><input type="checkbox" name="all_day" value="on" onclick="connecttext('time_value', this.checked);" checked>All Day?</label>
+                                {% else: %}
+                                    <label><input type="checkbox" name="all_day" value="on" onclick="connecttext('time_value', this.checked);">All Day?</label>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+        </div>
+    </section>
+</section>
+
+{% include "footer.html" %}
